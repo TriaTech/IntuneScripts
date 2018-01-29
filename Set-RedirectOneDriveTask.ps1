@@ -23,7 +23,7 @@ Start-BitsTransfer -Source $Url -Destination "$Target\$Script"
 $action = New-ScheduledTaskAction -Execute 'powershell.exe' -Argument "-ExecutionPolicy Bypass -NonInteractive -WindowStyle Hidden -File $Target\$Script"
 $trigger =  New-ScheduledTaskTrigger -AtLogon -RandomDelay (New-TimeSpan -Minutes 1)
 $settings = New-ScheduledTaskSettingsSet -AllowStartIfOnBatteries -Hidden -DontStopIfGoingOnBatteries -Compatibility Win8
-$principal = New-ScheduledTaskPrincipal -GroupId "BUILTIN\Users"
+$principal = New-ScheduledTaskPrincipal -GroupId "S-1-5-32-545"
 $task = New-ScheduledTask -Action $action -Trigger $trigger -Settings $settings -Principal $principal
 Register-ScheduledTask -InputObject $task -TaskName "Redirect Folders to OneDrive"
 
